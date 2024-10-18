@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\EmpresaController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,4 @@ Route::get('/aprobaciones/crear', function () {
 })->name('aprobaciones.crear');
 
 Route::resource('empresas', EmpresaController::class);
+Route::resource('empleados', EmpleadoController::class);

@@ -15,9 +15,9 @@
             'icon' => 'fa-solid fa-magnifying-glass',        
         ],
         [
-            'name' => 'Registrar',
-            'url' => route('aprobaciones.crear'),
-            'active' => request()->routeIs('aprobaciones.crear'),
+            'name' => 'Empleados',
+            'url' => route('empleados.index'),
+            'active' => request()->routeIs('empleados.index'),
             'icon' => 'fa-solid fa-user-plus',        
         ],
 

@@ -30,5 +30,10 @@ class Empresa extends Model
      */
     protected $fillable = ['nombre', 'tramo', 'tipo', 'nit'];
 
+    public function empleados()
+    {
+        return $this->hasMany(Empleado::class);
+    }
+
 
 }
