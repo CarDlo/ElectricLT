@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\TareaController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\SubcontratistaController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,5 +38,8 @@ Route::get('/aprobaciones/crear', function () {
     return view('aprobaciones.crear');
 })->name('aprobaciones.crear');
 
-Route::resource('empresas', EmpresaController::class);
+Route::resource('empresas', EmpresaController::class)->middleware('auth');
 Route::resource('empleados', EmpleadoController::class);
+Route::resource('subcontratistas', SubcontratistaController::class)->middleware('auth');
+
+Route::resource('tareas', TareaController::class);

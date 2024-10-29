@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmpleadoRequest extends FormRequest
+class TareaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,10 @@ class EmpleadoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cedula' => 'required|string|max:255|unique:empleados,cedula', // La cédula debe ser única
-            'nombre' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'cargo' => 'required|string|max:255',
-            'empresa_id' => 'required|exists:empresas,id',
-            'subcontratista_id' => 'required|exists:subcontratistas,id',
-        
+			'titulo' => 'required|string',
+			'estado' => 'required|string',
+			'vencimiento' => 'required',
+			'user_id' => 'required',
         ];
     }
 }

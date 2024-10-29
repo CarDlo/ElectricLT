@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
+use App\Models\Empresa;
+use App\Models\Subcontratista;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmpleadoRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
+use Illuminate\Support\Facades\Auth;
 class EmpleadoController extends Controller
 {
     /**
@@ -16,10 +18,11 @@ class EmpleadoController extends Controller
      */
     public function index(Request $request): View
     {
-        $empleados = Empleado::paginate();
+        $empleados = Empleado::all();
+        $empresas = Empresa::all();
+        $subcontratistas = Subcontratista::all();
 
-        return view('empleado.index', compact('empleados'))
-            ->with('i', ($request->input('page', 1) - 1) * $empleados->perPage());
+        return view('empleado.index', compact('empleados', 'empresas', 'subcontratistas'));
     }
 
     /**
@@ -27,9 +30,11 @@ class EmpleadoController extends Controller
      */
     public function create(): View
     {
-        $empleado = new Empleado();
 
-        return view('empleado.create', compact('empleado'));
+        $empresas = Empresa::all();
+        $subcontratistas = Subcontratista::all();
+
+        return view('empleado.create', compact( 'empresas', 'subcontratistas'));
     }
 
     /**
@@ -37,10 +42,22 @@ class EmpleadoController extends Controller
      */
     public function store(EmpleadoRequest $request): RedirectResponse
     {
-        Empleado::create($request->validated());
+        
+        
+
+        // Reasignar valores al request
+        $data = $request->validated();
+        $data['estado'] = 'Pendiente';
+        $data['user_id'] = Auth::user()->id;
+        $data['condicion'] = 'Activo';
+
+        // Crear el registro con todos los datos
+        Empleado::create($data);
+
 
         return Redirect::route('empleados.index')
-            ->with('success', 'Empleado created successfully.');
+        ->with('mensaje', 'Se creo la aprobacion correctamente')
+        ->with('icono', 'success');
     }
 
     /**

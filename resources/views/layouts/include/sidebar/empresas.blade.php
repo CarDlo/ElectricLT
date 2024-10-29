@@ -9,10 +9,16 @@
         ],
         // Puedes agregar más links aquí
         [
-            'name' => 'Consultar',
+            'name' => 'Empresas',
             'url' => route('empresas.index'),
             'active' => request()->routeIs('empresas.index'),
-            'icon' => 'fa-solid fa-magnifying-glass',        
+            'icon' => 'fa-solid fa-building',        
+        ],
+        [
+            'name' => 'Subcontratista',
+            'url' => route('subcontratistas.index'),
+            'active' => request()->routeIs('subcontratistas.index'),
+            'icon' => 'fa-solid fa-industry',        
         ],
 
     ]

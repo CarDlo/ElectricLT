@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     
-    protected $perPage = 20;
+    //protected $perPage = 20;
 
     /**
      * The attributes that are mass assignable.
