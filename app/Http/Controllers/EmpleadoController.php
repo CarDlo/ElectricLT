@@ -95,7 +95,10 @@ class EmpleadoController extends Controller
     {
         Empleado::find($id)->delete();
 
+
         return Redirect::route('empleados.index')
-            ->with('success', 'Empleado deleted successfully');
+        ->with('mensaje', 'Se elimino la aprobacion correctamente')
+        ->with('icono', 'success');
+    
     }
 }

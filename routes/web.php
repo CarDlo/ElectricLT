@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DropzoneController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\SubcontratistaController;
+use App\Http\Controllers\LogempleadoController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,5 +43,9 @@ Route::get('/aprobaciones/crear', function () {
 Route::resource('empresas', EmpresaController::class)->middleware('auth');
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('subcontratistas', SubcontratistaController::class)->middleware('auth');
-
+Route::resource('logempleados', LogempleadoController::class);
+Route::get('/logempleados/create/{id}', [LogempleadoController::class, 'create'])->name('logempleados.create');
 Route::resource('tareas', TareaController::class);
+
+//Link de dropzone
+Route::post('/upload', [DropzoneController::class, 'store'])->name('dropzone.store');
