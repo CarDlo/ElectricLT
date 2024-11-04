@@ -27,7 +27,7 @@
                                 
                                     document.addEventListener('DOMContentLoaded', () => {
                                         const cedula = @json($empleado->cedula); // Obtener el valor de cedula
-                                        
+                                        const id = @json($empleado->id);
                                         new Dropzone('#my-dropzone', {
                                             url: `/upload/${cedula}`, // URL de tu controlador
                                             paramName: 'file', // Define el nombre del parámetro de archivo
