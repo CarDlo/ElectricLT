@@ -1,4 +1,5 @@
 
+
 <div class="grid grid-cols-1 gap-4 p-4 md:p-5 space-y-4 md:space-y-0">
 
      <!-- Detalle -->
@@ -42,13 +43,16 @@
     <small>{{ $message }}</small>
     @enderror
  
-    <form action="{{ route('upload.store', ['cedula' => $empleado->cedula]) }}" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
-        @csrf
-        
-    </form>
 
 
     </div>
+
+        <!-- Área específica de Dropzone -->
+        <div id="my-dropzone" class="dropzone">
+
+
+        </div>
+    
 <!-- Modal footer -->
 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
     <button data-modal-hide="crear-modal" type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Crear</button>

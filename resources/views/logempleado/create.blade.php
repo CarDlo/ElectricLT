@@ -13,12 +13,39 @@
             Atras
         </a>
     </div>
-                                <form method="POST" action="{{ route('logempleados.store') }}"  role="form" enctype="multipart/form-data">
+
+    
+                                <form method="POST" action="{{ route('logempleados.store') }}" role="form" enctype="multipart/form-data">
                                     @csrf
 
                                     @include('logempleado.form')
                                 </form>
 
-
+                                <script>
+                                    // Asegúrate de que Dropzone no descubra automáticamente
+                                    Dropzone.autoDiscover = false;
+                                
+                                    document.addEventListener('DOMContentLoaded', () => {
+                                        const cedula = @json($empleado->cedula); // Obtener el valor de cedula
+                                        
+                                        new Dropzone('#my-dropzone', {
+                                            url: `/upload/${cedula}`, // URL de tu controlador
+                                            paramName: 'file', // Define el nombre del parámetro de archivo
+                                            maxFilesize: 10, // Tamaño máximo del archivo en MB
+                                            acceptedFiles: 'image/jpeg,image/png,application/pdf', // Aceptar solo JPG, PNG y PDF
+                                            headers: {
+                                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Añade el token CSRF
+                                            },
+                                            // Manejo de respuestas de éxito
+                                            success: function(file, response) {
+                                                console.log(response.message); // Mostrar mensaje de éxito
+                                            },
+                                            // Manejo de errores
+                                            error: function(file, response) {
+                                                console.error('Error:', response); // Mostrar error
+                                            }
+                                        });
+                                    });
+                                </script>
                             
 </x-admin-layout>

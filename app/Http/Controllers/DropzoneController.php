@@ -10,12 +10,12 @@ use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 class DropzoneController extends Controller
 {
 
-    public function store(Request $request, $cedula)
+    public function upload(Request $request, $cedula)
     {
-        $validatedData = $request->validate([
+        //return response()->json($cedula);
+        $request->validate([
             'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
-
         // Definir la ruta de la carpeta con la cédula del empleado
         $folderPath = 'uploads/' . $cedula;
 
@@ -27,7 +27,7 @@ class DropzoneController extends Controller
         // Guardar el archivo subido
         $file = $request->file('file');
         $file->storeAs($folderPath, $file->getClientOriginalName());
-
+       
         return response()->json(['message' => 'Archivo subido exitosamente.']);
     }
 
