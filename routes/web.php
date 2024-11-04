@@ -48,4 +48,5 @@ Route::get('/logempleados/create/{id}', [LogempleadoController::class, 'create']
 Route::resource('tareas', TareaController::class);
 
 //Link de dropzone
-Route::post('/upload', [DropzoneController::class, 'store'])->name('dropzone.store');
+Route::post('/upload/{cedula}', [DropzoneController::class, 'upload'])->name('upload.store');
+

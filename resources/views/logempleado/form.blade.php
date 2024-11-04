@@ -1,3 +1,4 @@
+
 <div class="grid grid-cols-1 gap-4 p-4 md:p-5 space-y-4 md:space-y-0">
 
      <!-- Detalle -->
@@ -36,35 +37,23 @@
             <label for="fechaAprobacion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Aprobación</label>
             <input type="datetime-local" id="fechaAprobacion" name="fechaAprobacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Fecha de Aprobación" />
         </div>
-    </div>
+
     @error('fechaAprobacion')
     <small>{{ $message }}</small>
     @enderror
-
-    <div>
-        <label for="Mydropzone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subir archivos</label>
+ 
+    <form action="{{ route('upload.store', ['cedula' => $empleado->cedula]) }}" class="dropzone" id="my-dropzone" enctype="multipart/form-data">
+        @csrf
         
-        <form action="{{ route('dropzone.store') }}" class="dropzone" enctype="multipart/form-data" method="POST" id="Mydropzone">
-            @csrf
+    </form>
 
-        </form>
+
     </div>
-    
-    <script type="text/javascript">
-        
-    
-        document.addEventListener("DOMContentLoaded", function () {
-            new Dropzone("#Mydropzone", {
-                paramName: "file",
-                maxFilesize: 10,
-                acceptedFiles: ".png,.jpg,.jpeg,.pdf",
-            });
-        });
-    </script>
-    
-
 <!-- Modal footer -->
 <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
     <button data-modal-hide="crear-modal" type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Crear</button>
     <button data-modal-hide="crear-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
 </div>
+
+
+<!-- Importa el JavaScript de FilePond -->
