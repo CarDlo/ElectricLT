@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 use App\Models\Logarchivo;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
 use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class DropzoneController extends Controller
 {
 
-    public function upload(Request $request, $cedula)
+    public function upload(Request $request, $id)
 {
-    $id = $request->input('id');
+    $cedula = Empleado::find($id)->cedula;
     //return response()->json($id);
+
+    
     // Validar la solicitud
     $request->validate([
         'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
@@ -37,8 +41,10 @@ class DropzoneController extends Controller
     $file->storeAs($folderPath, $nombreArchivo);
 
     // Crear un nuevo registro en logarchivos
+
+
     Logarchivo::create([
-        'logempleado_id' => $id, 
+        'empleado_id' => $id, 
         'nombre_archivo' => $nombreArchivo,
         'url' => $url,
         'fecha_subida' => now(), // Fecha y hora actual
@@ -46,7 +52,7 @@ class DropzoneController extends Controller
         'tamaño' => $tamaño / 1024, // Convertir a kilobytes
     ]);
 
-   // return response()->json(['message' => 'Archivo subido exitosamente.']);
+    return response()->json(['message' => 'Archivo subido exitosamente.']);
 }
 
 }

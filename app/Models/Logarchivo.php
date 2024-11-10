@@ -11,7 +11,7 @@ class Logarchivo extends Model
 
         // Definir las columnas que se pueden asignar masivamente
         protected $fillable = [
-            'logempleado_id', // ID del empleado relacionado
+            'empleado_id', // ID del empleado relacionado
             'nombre_archivo', // Nombre del archivo subido
             'url',            // URL del archivo
             'fecha_subida',   // Fecha en que se subió el archivo

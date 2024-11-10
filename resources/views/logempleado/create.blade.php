@@ -29,7 +29,7 @@
                                         const cedula = @json($empleado->cedula); // Obtener el valor de cedula
                                         const id = @json($empleado->id);
                                         new Dropzone('#my-dropzone', {
-                                            url: `/upload/${cedula}`, // URL de tu controlador
+                                            url: `/upload/${id}`, // URL de tu controlador
                                             paramName: 'file', // Define el nombre del parámetro de archivo
                                             maxFilesize: 10, // Tamaño máximo del archivo en MB
                                             acceptedFiles: 'image/jpeg,image/png,application/pdf', // Aceptar solo JPG, PNG y PDF
