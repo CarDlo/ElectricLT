@@ -43,10 +43,22 @@ Route::get('/aprobaciones/crear', function () {
 Route::resource('empresas', EmpresaController::class)->middleware('auth');
 Route::resource('empleados', EmpleadoController::class);
 Route::resource('subcontratistas', SubcontratistaController::class)->middleware('auth');
-Route::resource('logempleados', LogempleadoController::class);
-Route::get('/logempleados/create/{id}', [LogempleadoController::class, 'create'])->name('logempleados.create');
+
+
 Route::resource('tareas', TareaController::class);
+
+//rutas Logempleado
+Route::get('/logempleados', [LogempleadoController::class, 'index'])->name('logempleados.index');
+Route::get('/logempleados/create/{id}', [LogempleadoController::class, 'create'])->name('logempleados.create');
+Route::post('/logempleados', [LogempleadoController::class, 'store'])->name('logempleados.store');
+Route::get('/logempleados/{id}', [LogempleadoController::class, 'show'])->name('logempleados.show');
+Route::get('/logempleados/{id}/edit', [LogempleadoController::class, 'edit'])->name('logempleados.edit');
+Route::put('/logempleados/{id}', [LogempleadoController::class, 'update'])->name('logempleados.update');
+Route::delete('/logempleados/{id}', [LogempleadoController::class, 'destroy'])->name('logempleados.destroy');
+
+
 
 //Link de dropzone
 Route::post('/upload/{id}', [DropzoneController::class, 'upload'])->name('upload.store');
+Route::delete('/destroy/{id}', [DropzoneController::class, 'destroy'])->name('upload.destroy');
 

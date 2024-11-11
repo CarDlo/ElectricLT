@@ -34,25 +34,44 @@ class DropzoneController extends Controller
     // Guardar el archivo subido
     $file = $request->file('file');
     $nombreArchivo = $file->getClientOriginalName();
-    $url = Storage::url($folderPath . '/' . $nombreArchivo); // Generar la URL pública
+    //$url = Storage::url($folderPath . '/' . $nombreArchivo); // Generar la URL pública
     $tamaño = $file->getSize(); // Obtener el tamaño del archivo en bytes
-
+    $rutaArchivo = $folderPath . '/' . $nombreArchivo; // Ruta física al archivo en el almacenamient
     // Almacenar el archivo
     $file->storeAs($folderPath, $nombreArchivo);
 
     // Crear un nuevo registro en logarchivos
 
 
-    Logarchivo::create([
+    $Archivo = Logarchivo::create([
         'empleado_id' => $id, 
         'nombre_archivo' => $nombreArchivo,
-        'url' => $url,
+        'url' => $rutaArchivo,
         'fecha_subida' => now(), // Fecha y hora actual
         'tipo_archivo' => $file->getClientOriginalExtension(),
         'tamaño' => $tamaño / 1024, // Convertir a kilobytes
     ]);
 
-    return response()->json(['message' => 'Archivo subido exitosamente.']);
+    return response()->json([
+        'id' => $Archivo->id,
+        'message' => 'Archivo subido exitosamente.'
+    ], 200);
 }
+
+    public function destroy($id)
+    {
+        // Encuentra el archivo en la base de datos por su ID
+        $archivo = Logarchivo::findOrFail($id);
+        Debugbar::info($archivo->url);
+        // Elimina el archivo del almacenamiento si existe
+        if (Storage::exists($archivo->url)) {
+            Storage::delete($archivo->url);
+        }
+
+        // Elimina el registro del archivo en la base de datos
+        $archivo->delete();
+
+        return response()->json(['message' => 'Archivo eliminado correctamente.']);
+    }
 
 }
