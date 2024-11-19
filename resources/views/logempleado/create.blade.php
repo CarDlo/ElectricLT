@@ -78,7 +78,8 @@
 
                                             
                                             paramName: 'file', // Define el nombre del parámetro de archivo
-                                            maxFilesize: 10, // Tamaño máximo del archivo en MB
+                                            maxFilesize: 2, // Tamaño máximo del archivo en MB
+                                            dictFileTooBig: "El archivo es demasiado grande. El tamaño máximo permitido es 3 MB.",
                                             acceptedFiles: 'image/jpeg,image/png,application/pdf', // Aceptar solo JPG, PNG y PDF
                                             headers: {
                                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Añade el token CSRF
