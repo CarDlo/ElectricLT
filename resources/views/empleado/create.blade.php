@@ -10,10 +10,10 @@
             Atras
         </a>
     </div>
-                                <form method="POST" action="{{ route('empleados.store') }}"  role="form" enctype="multipart/form-data">
-                                    @csrf
+        <form method="POST" action="{{ route('empleados.store') }}"  role="form" enctype="multipart/form-data">
+            @csrf
 
-                                    @include('empleado.form')
-                                </form>
+            @include('empleado.form')
+        </form>
                             
 </x-admin-layout>

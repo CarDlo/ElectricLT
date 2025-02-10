@@ -9,7 +9,7 @@
         ],
         // Puedes agregar más links aquí
         [
-            'name' => 'Consultar',
+            'name' => 'Estadisticas',
             'url' => route('aprobaciones.show'),
             'active' => request()->routeIs('aprobaciones.show'),
             'icon' => 'fa-solid fa-magnifying-glass',        
